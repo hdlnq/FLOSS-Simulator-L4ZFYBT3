@@ -35,8 +35,8 @@ Console.WriteLine($"Initial Committers: {config.InitialCommitters}  " +
                   $"Contributors: {config.InitialContributors}");
 Console.WriteLine();
 
-// ── 1. Monte Carlo ──────────────────────────────────────────────────
-Console.WriteLine("Running Monte Carlo simulation...");
+// ── 1. Simulation ───────────────────────────────────────────────────
+Console.WriteLine("Running simulation...");
 var engine  = new SimulationEngine(config);
 var results = new List<SimulationResult>(config.SimulationRuns);
 

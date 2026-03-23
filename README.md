@@ -1,12 +1,12 @@
 # FLOSS Community Survival Simulation
 
-An agent-based Monte Carlo simulation framework for quantifying the survival probability of Free/Libre and Open Source Software (FLOSS) communities.
+An agent-based simulation framework for quantifying the survival probability of Free/Libre and Open Source Software (FLOSS) communities.
 
 ## Overview
 
 This framework models FLOSS community dynamics at daily resolution over multi-year horizons. The model represents two agent roles — **Committers** and **Contributors** — whose participation is governed by a motivation scalar that decays over time and responds to project events (commits, PR merges, rejections, and review delays).
 
-Community survival is defined as the presence of at least one active Committer. Survival probability is estimated using a Kaplan-Meier-style estimator across 10,000 independent Monte Carlo replications.
+Community survival is defined as the presence of at least one active Committer. Survival probability is estimated using a Kaplan-Meier-style estimator across 10,000 independent replications.
 
 ## Repository Structure
 
@@ -79,7 +79,7 @@ Pre-computed outputs (excluding large log files) are in [`data/`](data/).
 | Parameter              | Default | Description                                       |
 | ---------------------- | ------- | ------------------------------------------------- |
 | `MaxSteps`             | 1825    | Simulation horizon (days)                         |
-| `SimulationRuns`       | 10000   | Monte Carlo replications                          |
+| `SimulationRuns`       | 10000   | Number of simulation replications                 |
 | `InitialCommitters`    | 1       | Initial committer count                           |
 | `ActivityDecayRate`    | 0.01    | Daily motivation decay                            |
 | `DeactivationRate`     | 0.10    | Prob. of deactivation when motivation < threshold |
