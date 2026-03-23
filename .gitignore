@@ -9,6 +9,7 @@ results/
 # Excluded documents
 paper.md
 SPEC.md
+REPORT.md
 
 # OS
 .DS_Store
