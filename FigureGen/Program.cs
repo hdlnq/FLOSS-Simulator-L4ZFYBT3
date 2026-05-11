@@ -17,8 +17,8 @@ const float  FONT_BAR_LABEL   = 20f;
 const float  FONT_STAT_LABEL  = 20f;
 const float  FONT_LEGEND      = 16f;
 
-const double Y_AXIS_MIN       = 0.0;
-const double Y_AXIS_MAX       = 1.2;
+const double Y_AXIS_MIN       = -0.04;
+const double Y_AXIS_MAX       =  1.2;
 
 const float  LINE_W_CURVE     = 2.4f;
 const float  LINE_W_ERRORBAR  = 2.5f;
