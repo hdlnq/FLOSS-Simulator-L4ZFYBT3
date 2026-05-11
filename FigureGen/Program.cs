@@ -15,6 +15,10 @@ const float  FONT_AXIS_LABEL  = 20f;
 const float  FONT_TICK_LABEL  = 20f;
 const float  FONT_BAR_LABEL   = 20f;
 const float  FONT_STAT_LABEL  = 20f;
+const float  FONT_LEGEND      = 16f;
+
+const double Y_AXIS_MIN       = 0.0;
+const double Y_AXIS_MAX       = 1.2;
 
 const float  LINE_W_CURVE     = 2.4f;
 const float  LINE_W_ERRORBAR  = 2.5f;
@@ -70,8 +74,9 @@ Console.Write("fig_survival_curve.svg ... ");
     plt.Axes.Left.Label.FontSize            = FONT_AXIS_LABEL;
     plt.Title("Survival Curves by Scenario  (N = 10,000 runs)");
     plt.Axes.Title.Label.FontSize           = FONT_TITLE;
-    plt.ShowLegend(Alignment.UpperRight);
-    plt.Axes.SetLimits(0, T_MAX + 100, -0.04, 1.06);
+    var legend = plt.ShowLegend(Alignment.UpperRight);
+    legend.FontSize = FONT_LEGEND;
+    plt.Axes.SetLimits(0, T_MAX + 100, Y_AXIS_MIN, Y_AXIS_MAX);
     plt.SaveSvg(Path.Combine(outDir, "fig_survival_curve.svg"), FIG_W, FIG_H);
 }
 Console.WriteLine("done");
@@ -174,7 +179,8 @@ Console.Write("fig_death_stats.svg ... ");
     // Y 上限をデータ範囲に合わせる（MeanDeath+StdDeath の最大値 × 1.15）
     double yMax = scenarios.Max(s => s.MeanDeath + s.StdDeath) * 1.15;
     plt.Axes.SetLimits(-0.7, scenarios.Length - 0.3, 0, yMax);
-    plt.ShowLegend(Alignment.UpperRight);
+    var legend = plt.ShowLegend(Alignment.UpperLeft);
+    legend.FontSize = FONT_LEGEND;
     plt.HideGrid();
     plt.SaveSvg(Path.Combine(outDir, "fig_death_stats.svg"), FIG_W, FIG_H);
 }

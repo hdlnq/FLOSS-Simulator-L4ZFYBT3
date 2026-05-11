@@ -133,33 +133,33 @@
 				192 d
 		</text>
 	</g>
-	<rect fill="#010101" fill-opacity="0.2" x="729.02539" y="61.601563" width="151.97461" height="91.84375"/>
-	<rect fill="white" x="726.02539" y="58.601563" width="151.97461" height="91.84375"/>
-	<rect fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" x="726.02539" y="58.601563" width="151.97461" height="91.84375"/>
+	<rect fill="#010101" fill-opacity="0.2" x="70.007813" y="61.601563" width="187.63281" height="113.125"/>
+	<rect fill="white" x="67.007813" y="58.601563" width="187.63281" height="113.125"/>
+	<rect fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" x="67.007813" y="58.601563" width="187.63281" height="113.125"/>
 	<clipPath id="cl_25">
-		<rect x="735.02539" y="62.601563" width="133.97461" height="83.84375"/>
+		<rect x="76.007813" y="62.601563" width="169.63281" height="105.125"/>
 	</clipPath>
 	<g clip-path="url(#cl_25)">
-		<text transform="translate(761.025 71.582)" font-size="12" font-family="Segoe UI" x="0, 6.8789063, 12.984375, 18.076172, 24.351563, 27.257813, 30.164063, 36.955078, " y="3.046875, ">
+		<text transform="translate(102.008 74.2422)" font-size="16" font-family="Segoe UI" x="0, 9.171875, 17.3125, 24.101563, 32.46875, 36.34375, 40.21875, 49.273438, " y="4.0625, ">
 				Baseline
 		</text>
-		<path fill="none" stroke="#555" stroke-width="1" stroke-miterlimit="4" d="M756.025 71.582L736.025 71.582"/>
-		<ellipse fill="#555" cx="746.02539" cy="71.582031" rx="7" ry="7"/>
-		<text transform="translate(761.025 93.543)" font-size="12" font-family="Segoe UI" x="0, 7.7402344, 10.341797, 13.628906, 16.822266, 23.613281, 26.519531, 30.585938, 38.015625, 45.046875, 55.382813, 65.71875, 68.625, 72.691406, 76.757813, 83.033203, 87.205078, 92.296875, 100.50586, " y="3.046875, ">
+		<path fill="none" stroke="#555" stroke-width="1" stroke-miterlimit="4" d="M97.0078 74.2422L77.0078 74.2422"/>
+		<ellipse fill="#555" cx="87.007813" cy="74.242188" rx="7" ry="7"/>
+		<text transform="translate(102.008 101.523)" font-size="16" font-family="Segoe UI" x="0, 10.320313, 13.789063, 18.171875, 22.429688, 31.484375, 35.359375, 40.78125, 50.6875, 60.0625, 73.84375, 87.625, 91.5, 96.921875, 102.34375, 110.71094, 116.27344, 123.0625, 134.00781, " y="4.0625, ">
 				A: InitCommitters=3
 		</text>
-		<path fill="none" stroke="#1F77B4" stroke-width="1" stroke-miterlimit="4" d="M756.025 93.543L736.025 93.543"/>
-		<ellipse fill="#1F77B4" cx="746.02539" cy="93.542969" rx="7" ry="7"/>
-		<text transform="translate(761.025 115.504)" font-size="12" font-family="Segoe UI" x="0, 6.8789063, 9.4804688, 12.767578, 18.744141, 26.953125, 33.421875, 36.023438, " y="3.046875, ">
+		<path fill="none" stroke="#1F77B4" stroke-width="1" stroke-miterlimit="4" d="M97.0078 101.523L77.0078 101.523"/>
+		<ellipse fill="#1F77B4" cx="87.007813" cy="101.52344" rx="7" ry="7"/>
+		<text transform="translate(102.008 128.805)" font-size="16" font-family="Segoe UI" x="0, 9.171875, 12.640625, 17.023438, 24.992188, 35.9375, 44.5625, 48.03125, " y="4.0625, ">
 				B: λ=0.2
 		</text>
-		<path fill="none" stroke="#FF7F0E" stroke-width="1" stroke-miterlimit="4" d="M756.025 115.504L736.025 115.504"/>
-		<ellipse fill="#FF7F0E" cx="746.02539" cy="115.50391" rx="7" ry="7"/>
-		<text transform="translate(761.025 137.465)" font-size="12" font-family="Segoe UI" x="0, 7.4296875, 10.03125, 13.318359, 22.294922, 29.326172, 32.613281, 39.333984, 43.505859, 50.537109, 60.873047, 67.904297, 71.970703, 74.876953, 81.908203, " y="3.046875, ">
+		<path fill="none" stroke="#FF7F0E" stroke-width="1" stroke-miterlimit="4" d="M97.0078 128.805L77.0078 128.805"/>
+		<ellipse fill="#FF7F0E" cx="87.007813" cy="128.80469" rx="7" ry="7"/>
+		<text transform="translate(102.008 156.086)" font-size="16" font-family="Segoe UI" x="0, 9.90625, 13.375, 17.757813, 29.726563, 39.101563, 43.484375, 52.445313, 58.007813, 67.382813, 81.164063, 90.539063, 95.960938, 99.835938, 109.21094, " y="4.0625, ">
 				C: No Promotion
 		</text>
-		<path fill="none" stroke="#D62728" stroke-width="1" stroke-miterlimit="4" d="M756.025 137.465L736.025 137.465"/>
-		<ellipse fill="#D62728" cx="746.02539" cy="137.46484" rx="7" ry="7"/>
+		<path fill="none" stroke="#D62728" stroke-width="1" stroke-miterlimit="4" d="M97.0078 156.086L77.0078 156.086"/>
+		<ellipse fill="#D62728" cx="87.007813" cy="156.08594" rx="7" ry="7"/>
 	</g>
 	<path fill="none" stroke="black" stroke-width="1" stroke-miterlimit="4" d="M191.257 479.398L191.257 483.398"/>
 	<text transform="translate(191.257 485.398)" font-size="20" font-family="Segoe UI" x="-36.025391, -24.560547, -14.384766, -5.8984375, 4.5605469, 9.4042969, 14.248047, 25.566406, " y="18.378906, ">
