@@ -4,7 +4,29 @@ using ScottPlot;
 string outDir = Path.Combine("..", "figures");
 Directory.CreateDirectory(outDir);
 
-const int T_MAX = 1825;
+// ── Chart constants ───────────────────────────────────────────────────────────
+const int    T_MAX            = 1825;
+const int    N_RUNS           = 10_000;
+const int    FIG_W            = 900;
+const int    FIG_H            = 520;
+
+const float  FONT_TITLE       = 20f;
+const float  FONT_AXIS_LABEL  = 20f;
+const float  FONT_TICK_LABEL  = 20f;
+const float  FONT_BAR_LABEL   = 20f;
+const float  FONT_STAT_LABEL  = 20f;
+
+const float  LINE_W_CURVE     = 2.4f;
+const float  LINE_W_ERRORBAR  = 2.5f;
+const float  MARKER_SIZE      = 14f;
+
+const double CAP_HALF         = 0.12;
+const double BAR_LABEL_OFFSET = 2.5;
+
+const string COL_BG           = "#ffffff";
+const string COL_VLINE        = "#aaaaaa";
+const string COL_BAR_TEXT     = "#222222";
+const string COL_STAT_TEXT    = "#333333";
 
 // ── Scenario data (N=10,000) ──────────────────────────────────────────────────
 var scenarios = new (string Label, string Color,
@@ -24,29 +46,33 @@ var rng = new Random(42);
 Console.Write("fig_survival_curve.svg ... ");
 {
     var plt = new Plot();
-    plt.FigureBackground.Color = ScottPlot.Color.FromHex("#ffffff");
+    plt.FigureBackground.Color = ScottPlot.Color.FromHex(COL_BG);
 
     var vl = plt.Add.VerticalLine(T_MAX);
-    vl.Color       = ScottPlot.Color.FromHex("#aaaaaa");
+    vl.Color       = ScottPlot.Color.FromHex(COL_VLINE);
     vl.LineWidth   = 1;
     vl.LinePattern = LinePattern.Dashed;
 
     foreach (var sc in scenarios)
     {
-        var dt = SampleDeathTimes(sc.Surv, sc.MeanDeath, sc.StdDeath, 10_000, T_MAX, rng);
+        var dt = SampleDeathTimes(sc.Surv, sc.MeanDeath, sc.StdDeath, N_RUNS, T_MAX, rng);
         var (days, surv) = ComputeCurve(dt, T_MAX);
         var line = plt.Add.ScatterLine(days, surv);
         line.Color      = ScottPlot.Color.FromHex(sc.Color);
-        line.LineWidth  = 2.4f;
+        line.LineWidth  = LINE_W_CURVE;
         line.LegendText = $"{sc.Label}  (S = {sc.Surv * 100:F1}%)";
     }
 
     plt.XLabel("Step (days)");
+    plt.Axes.Bottom.Label.FontSize          = FONT_AXIS_LABEL;
+    plt.Axes.Bottom.TickLabelStyle.FontSize = FONT_TICK_LABEL;
     plt.YLabel("P(alive at step t)");
+    plt.Axes.Left.Label.FontSize            = FONT_AXIS_LABEL;
     plt.Title("Survival Curves by Scenario  (N = 10,000 runs)");
+    plt.Axes.Title.Label.FontSize           = FONT_TITLE;
     plt.ShowLegend(Alignment.UpperRight);
     plt.Axes.SetLimits(0, T_MAX + 100, -0.04, 1.06);
-    plt.SaveSvg(Path.Combine(outDir, "fig_survival_curve.svg"), 900, 520);
+    plt.SaveSvg(Path.Combine(outDir, "fig_survival_curve.svg"), FIG_W, FIG_H);
 }
 Console.WriteLine("done");
 
@@ -56,7 +82,7 @@ Console.WriteLine("done");
 Console.Write("fig_survival_bar.svg ... ");
 {
     var plt = new Plot();
-    plt.FigureBackground.Color = ScottPlot.Color.FromHex("#ffffff");
+    plt.FigureBackground.Color = ScottPlot.Color.FromHex(COL_BG);
 
     double[] rates = scenarios.Select(s => s.Surv * 100).ToArray();
     var bars = plt.Add.Bars(rates);
@@ -65,9 +91,9 @@ Console.Write("fig_survival_bar.svg ... ");
 
     for (int i = 0; i < rates.Length; i++)
     {
-        var txt = plt.Add.Text($"{rates[i]:F1}%", i, rates[i] + 2.5);
-        txt.LabelFontSize            = 14;
-        txt.LabelFontColor           = ScottPlot.Color.FromHex("#222222");
+        var txt = plt.Add.Text($"{rates[i]:F1}%", i, rates[i] + BAR_LABEL_OFFSET);
+        txt.LabelFontSize            = FONT_BAR_LABEL;
+        txt.LabelFontColor           = ScottPlot.Color.FromHex(COL_BAR_TEXT);
         txt.LabelAlignment           = Alignment.LowerCenter;
         txt.LabelBold                = true;
         txt.LabelBorderWidth         = 0;
@@ -75,16 +101,18 @@ Console.Write("fig_survival_bar.svg ... ");
     }
 
     plt.YLabel("Survival Rate (%)");
+    plt.Axes.Left.Label.FontSize  = FONT_AXIS_LABEL;
     plt.Title("Survival Rate by Scenario  (N = 10,000 runs × 1825 days)");
+    plt.Axes.Title.Label.FontSize = FONT_TITLE;
 
     plt.Axes.Bottom.SetTicks(
         Enumerable.Range(0, scenarios.Length).Select(i => (double)i).ToArray(),
         scenarios.Select(s => s.Label).ToArray());
-    plt.Axes.Bottom.TickLabelStyle.FontSize = 12;
+    plt.Axes.Bottom.TickLabelStyle.FontSize = FONT_TICK_LABEL;
 
     plt.Axes.SetLimits(-0.6, scenarios.Length - 0.4, 0, 110);
     plt.HideGrid();
-    plt.SaveSvg(Path.Combine(outDir, "fig_survival_bar.svg"), 900, 520);
+    plt.SaveSvg(Path.Combine(outDir, "fig_survival_bar.svg"), FIG_W, FIG_H);
 }
 Console.WriteLine("done");
 
@@ -94,9 +122,7 @@ Console.WriteLine("done");
 Console.Write("fig_death_stats.svg ... ");
 {
     var plt = new Plot();
-    plt.FigureBackground.Color = ScottPlot.Color.FromHex("#ffffff");
-
-    double capHalf = 0.12;
+    plt.FigureBackground.Color = ScottPlot.Color.FromHex(COL_BG);
 
     for (int i = 0; i < scenarios.Length; i++)
     {
@@ -109,46 +135,48 @@ Console.Write("fig_death_stats.svg ... ");
             new double[] { i, i },
             new double[] { lo, hi });
         vbar.Color      = col;
-        vbar.LineWidth  = 2.5f;
+        vbar.LineWidth  = LINE_W_ERRORBAR;
         vbar.MarkerSize = 0;
 
         plt.Add.ScatterLine(
-            new double[] { i - capHalf, i + capHalf },
+            new double[] { i - CAP_HALF, i + CAP_HALF },
             new double[] { lo, lo })
             .Color = col;
 
         plt.Add.ScatterLine(
-            new double[] { i - capHalf, i + capHalf },
+            new double[] { i - CAP_HALF, i + CAP_HALF },
             new double[] { hi, hi })
             .Color = col;
 
         var pt = plt.Add.Scatter(new double[] { i }, new double[] { sc.MeanDeath });
-        pt.MarkerSize = 14;
+        pt.MarkerSize = MARKER_SIZE;
         pt.Color      = col;
         pt.LegendText = sc.Label;
 
-        var txt = plt.Add.Text($"{sc.MeanDeath:F0} d", i + 0.12, sc.MeanDeath);
-        txt.LabelFontSize            = 11;
-        txt.LabelFontColor           = ScottPlot.Color.FromHex("#333333");
+        var txt = plt.Add.Text($"{sc.MeanDeath:F0} d", i + CAP_HALF, sc.MeanDeath);
+        txt.LabelFontSize            = FONT_STAT_LABEL;
+        txt.LabelFontColor           = ScottPlot.Color.FromHex(COL_STAT_TEXT);
         txt.LabelAlignment           = Alignment.MiddleLeft;
         txt.LabelBorderWidth         = 0;
         txt.LabelBackgroundColor     = ScottPlot.Colors.Transparent;
     }
 
     plt.YLabel("Mean Death Step (days)");
+    plt.Axes.Left.Label.FontSize  = FONT_AXIS_LABEL;
     plt.Title("Mean Death Day ± Std Dev by Scenario  (N = 10,000)");
+    plt.Axes.Title.Label.FontSize = FONT_TITLE;
 
     plt.Axes.Bottom.SetTicks(
         Enumerable.Range(0, scenarios.Length).Select(i => (double)i).ToArray(),
         scenarios.Select(s => s.Label).ToArray());
-    plt.Axes.Bottom.TickLabelStyle.FontSize = 12;
+    plt.Axes.Bottom.TickLabelStyle.FontSize = FONT_TICK_LABEL;
 
     // Y 上限をデータ範囲に合わせる（MeanDeath+StdDeath の最大値 × 1.15）
     double yMax = scenarios.Max(s => s.MeanDeath + s.StdDeath) * 1.15;
     plt.Axes.SetLimits(-0.7, scenarios.Length - 0.3, 0, yMax);
     plt.ShowLegend(Alignment.UpperRight);
     plt.HideGrid();
-    plt.SaveSvg(Path.Combine(outDir, "fig_death_stats.svg"), 900, 520);
+    plt.SaveSvg(Path.Combine(outDir, "fig_death_stats.svg"), FIG_W, FIG_H);
 }
 Console.WriteLine("done");
 
