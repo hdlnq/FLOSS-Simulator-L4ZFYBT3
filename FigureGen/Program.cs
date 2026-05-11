@@ -21,7 +21,7 @@ var rng = new Random(42);
 // ═════════════════════════════════════════════════════════════════════════════
 // Figure 1  Survival curves  (N=10,000)
 // ═════════════════════════════════════════════════════════════════════════════
-Console.Write("fig_survival_curve.png ... ");
+Console.Write("fig_survival_curve.svg ... ");
 {
     var plt = new Plot();
     plt.FigureBackground.Color = ScottPlot.Color.FromHex("#ffffff");
@@ -46,14 +46,14 @@ Console.Write("fig_survival_curve.png ... ");
     plt.Title("Survival Curves by Scenario  (N = 10,000 runs)");
     plt.ShowLegend(Alignment.UpperRight);
     plt.Axes.SetLimits(0, T_MAX + 100, -0.04, 1.06);
-    plt.SavePng(Path.Combine(outDir, "fig_survival_curve.png"), 900, 520);
+    plt.SaveSvg(Path.Combine(outDir, "fig_survival_curve.svg"), 900, 520);
 }
 Console.WriteLine("done");
 
 // ═════════════════════════════════════════════════════════════════════════════
 // Figure 2  Survival rate bar chart  (N=10,000)
 // ═════════════════════════════════════════════════════════════════════════════
-Console.Write("fig_survival_bar.png ... ");
+Console.Write("fig_survival_bar.svg ... ");
 {
     var plt = new Plot();
     plt.FigureBackground.Color = ScottPlot.Color.FromHex("#ffffff");
@@ -84,14 +84,14 @@ Console.Write("fig_survival_bar.png ... ");
 
     plt.Axes.SetLimits(-0.6, scenarios.Length - 0.4, 0, 110);
     plt.HideGrid();
-    plt.SavePng(Path.Combine(outDir, "fig_survival_bar.png"), 900, 520);
+    plt.SaveSvg(Path.Combine(outDir, "fig_survival_bar.svg"), 900, 520);
 }
 Console.WriteLine("done");
 
 // ═════════════════════════════════════════════════════════════════════════════
 // Figure 3  Mean death day ± std  (N=10,000)
 // ═════════════════════════════════════════════════════════════════════════════
-Console.Write("fig_death_stats.png ... ");
+Console.Write("fig_death_stats.svg ... ");
 {
     var plt = new Plot();
     plt.FigureBackground.Color = ScottPlot.Color.FromHex("#ffffff");
@@ -148,7 +148,7 @@ Console.Write("fig_death_stats.png ... ");
     plt.Axes.SetLimits(-0.7, scenarios.Length - 0.3, 0, yMax);
     plt.ShowLegend(Alignment.UpperRight);
     plt.HideGrid();
-    plt.SavePng(Path.Combine(outDir, "fig_death_stats.png"), 900, 520);
+    plt.SaveSvg(Path.Combine(outDir, "fig_death_stats.svg"), 900, 520);
 }
 Console.WriteLine("done");
 
